@@ -1,0 +1,26 @@
+import axiosInstance from '../api/axios';
+
+export const authService = {
+  /**
+   * Authentification de l'utilisateur
+   * @param {string} username - Nom d'utilisateur
+   * @param {string} password - Mot de passe
+   * @returns {Promise} Réponse contenant le token JWT et les infos utilisateur
+   */
+  login: async (username, password) => {
+    const response = await axiosInstance.post('/auth/login', {
+      username,
+      password,
+    });
+    return response.data;
+  },
+
+  /**
+   * Vérifier si le token est toujours valide (optionnel)
+   * @returns {Promise} Réponse du backend
+   */
+  validateToken: async () => {
+    const response = await axiosInstance.get('/auth/validate');
+    return response.data;
+  },
+};
